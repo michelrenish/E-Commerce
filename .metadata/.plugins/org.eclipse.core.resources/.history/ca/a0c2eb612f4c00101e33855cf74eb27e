@@ -1,0 +1,5 @@
+package com.cartService.model;
+
+public class CartItem {
+
+}
