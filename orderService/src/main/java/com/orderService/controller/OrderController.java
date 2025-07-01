@@ -2,6 +2,7 @@ package com.orderService.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.orderService.model.OrderItem;
 import com.orderService.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -22,8 +24,10 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/{userId}/place")
-    public Order placeOrder(@PathVariable Long userId, @RequestBody List<OrderItem> items) {
-        return orderService.placeOrder(userId, items);
+    public Mono<ResponseEntity<Order>> placeOrder(@PathVariable Long userId, @RequestBody List<OrderItem> items) {
+        return orderService.placeOrder(userId, items)
+                .map(order -> ResponseEntity.ok(order))
+                .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().body(null)));
     }
 
     @GetMapping("/{userId}")
