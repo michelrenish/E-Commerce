@@ -1,5 +1,0 @@
-package com.paymentService.repository;
-
-public interface PaymentRepository {
-
-}

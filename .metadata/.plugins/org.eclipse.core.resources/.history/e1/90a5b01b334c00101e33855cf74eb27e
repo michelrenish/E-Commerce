@@ -1,5 +1,0 @@
-package com.paymentService.model;
-
-public enum PaymentStatus {
-
-}

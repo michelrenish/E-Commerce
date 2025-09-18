@@ -19,6 +19,10 @@ public class AuthService {
 	    private final JwtUtil jwtUtil;
 
 	    public String register(RegisterRequest request) {
+	    	
+	    	if(userRepo.existsByEmail(request.getEmail()) || userRepo.existsByUsername(request.getUsername())) {
+	    		return "Given deitails already registered!";
+	    	}
 	        User user = new User();
 	        user.setUsername(request.getUsername());
 	        user.setEmail(request.getEmail());

@@ -25,10 +25,10 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @PostMapping
-    public Product create(@RequestBody Product product) {
-        return productService.addProduct(product);
-    }
+	    @PostMapping
+	    public Product create(@RequestBody Product product) {
+	        return productService.addProduct(product);
+	    }
 
     @GetMapping("/{id}")
     public Product getById(@PathVariable Long id) {

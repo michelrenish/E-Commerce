@@ -1,5 +1,0 @@
-package com.cartService.repository;
-
-public interface CartRepository {
-
-}

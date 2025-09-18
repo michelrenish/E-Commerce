@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inventoryService.dto.InventoryResponse;
 import com.inventoryService.model.Inventory;
 import com.inventoryService.service.InventoryService;
 
@@ -49,4 +50,14 @@ public class InventoryController {
             return ResponseEntity.badRequest().body("Insufficient stock");
         }
     }
+    @GetMapping("/details/{productId}")
+    public ResponseEntity<?> getInventoryDetails(@PathVariable Long productId) {
+        InventoryResponse response = service.getInventoryDetails(productId);
+        if (response != null) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(401).body("Product not found in inventory");
+        }
+    }
+
 }
